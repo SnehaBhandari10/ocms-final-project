@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+    <div style="margin-bottom: 3rem;">
+        <h2 style="font-size: 2.25rem; font-weight: 800; letter-spacing: -0.04em; color: var(--text-main);">Welcome
+            back, <span style="color: var(--accent);">Scholar</span></h2>
+        <p style="font-size: 1.125rem; color: var(--text-muted);">Ready to continue your learning journey today?</p>
+    </div>
+
+    <div class="card-grid">
+        <div class="card">
+            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">Courses in Progress</h3>
+            <p style="font-size: 2.5rem; font-weight: 800; color: var(--accent);">0</p>
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.5rem;">Keep going!</p>
+        </div>
+        <div class="card">
+            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem;">Certificates Earned</h3>
+            <p style="font-size: 2.5rem; font-weight: 800; color: var(--text-main);">0</p>
+        </div>
+    </div>
+
+    <div style="margin-top: 4rem;">
+        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 2rem;">Recommended for You</h3>
+        <div class="card" style="text-align: center; border-style: dashed; background: transparent;">
+            <p style="color: var(--text-muted);">Start exploring to get personalized recommendations.</p>
+            <a href="/courses-page/" class="btn btn-primary" style="margin-top: 1.5rem;">Browse Courses</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    if (!localStorage.getItem("access")) {
+        window.location.href = "/login/";
+    }
+</script>
+
+{% endblock %}

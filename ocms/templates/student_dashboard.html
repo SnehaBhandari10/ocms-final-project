@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+</head>
+<body>
+
+<h2>Welcome {{ request.user.username }}</h2>
+
+<h3>My Courses</h3>
+
+{% for enrollment in enrollments %}
+    <div style="border:1px solid black; padding:10px; margin:10px;">
+        <h4>{{ enrollment.course.title }}</h4>
+        <p>Progress: {{ enrollment.progress }}%</p>
+    </div>
+{% empty %}
+    <p>No courses enrolled.</p>
+{% endfor %}
+
+</body>
+</html>

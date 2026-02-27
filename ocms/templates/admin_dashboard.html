@@ -1,0 +1,24 @@
+<h2>Admin Analytics</h2>
+
+<div id="stats"></div>
+
+<script>
+const token = localStorage.getItem("access");
+const API_BASE = "http://127.0.0.1:8000/api";
+
+async function loadStats(){
+    const res = await fetch(`${API_BASE}/admin/analytics/`, {
+        headers: { "Authorization": `Bearer ${token}` }
+    });
+
+    const data = await res.json();
+
+    document.getElementById("stats").innerHTML = `
+        <p>Total Users: ${data.total_users}</p>
+        <p>Total Courses: ${data.total_courses}</p>
+        <p>Total Enrollments: ${data.total_enrollments}</p>
+    `;
+}
+
+loadStats();
+</script>

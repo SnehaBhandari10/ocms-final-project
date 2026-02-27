@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container" style="padding-top: 4rem;">
+    <header style="margin-bottom: 3.5rem; display: flex; justify-content: space-between; align-items: flex-end;">
+        <div>
+            <span class="badge" style="margin-bottom: 1rem;">System Administration</span>
+            <h2 style="font-size: 2.5rem; color: var(--primary);">Platform Console</h2>
+            <p style="color: var(--text-muted); font-size: 1rem;">Core metrics and infrastructure status.</p>
+        </div>
+        <div class="badge" style="background: #f0fdf4; color: #166534; padding: 0.5rem 1rem;">
+            System Healthy
+        </div>
+    </header>
+
+    <div class="card-grid">
+        <div class="card">
+            <h3
+                style="font-size: 0.875rem; font-weight: 600; color: var(--slate-500); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                Total Users</h3>
+            <p style="font-size: 2.5rem; font-weight: 800;">0</p>
+            <div style="margin-top: 1rem; font-size: 0.75rem; color: var(--slate-400);">Updated 2m ago</div>
+        </div>
+        <div class="card">
+            <h3
+                style="font-size: 0.875rem; font-weight: 600; color: var(--slate-500); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                Course Inventory</h3>
+            <p style="font-size: 2.5rem; font-weight: 800;">0</p>
+            <div style="margin-top: 1rem; font-size: 0.75rem; color: var(--accent);">+1 Draft pending</div>
+        </div>
+        <div class="card">
+            <h3
+                style="font-size: 0.875rem; font-weight: 600; color: var(--slate-500); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em;">
+                Revenue (INR)</h3>
+            <p style="font-size: 2.5rem; font-weight: 800;">₹0.00</p>
+        </div>
+    </div>
+
+    <div style="margin-top: 5rem;">
+        <h3 style="font-size: 1.125rem; margin-bottom: 1.5rem; color: var(--primary);">Infrastructure Logs</h3>
+        <div class="card" style="background: var(--slate-50); border-color: var(--slate-200);">
+            <p style="font-family: monospace; font-size: 0.8125rem; color: var(--slate-600);">[2026-02-27 23:06] - INFO:
+                All systems operational. 0 alerts triggered.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    if (!localStorage.getItem("access")) {
+        window.location.href = "/login/";
+    }
+</script>
+
+{% endblock %}

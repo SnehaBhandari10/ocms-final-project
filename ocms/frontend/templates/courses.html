@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container" style="padding-top: 4rem;">
+    <header style="margin-bottom: 3.5rem;">
+        <span class="badge" style="margin-bottom: 1rem;">Academic Catalog</span>
+        <h2 style="font-size: 2.5rem; color: var(--primary);">Curriculum Excellence.</h2>
+        <p style="color: var(--text-muted); font-size: 1rem;">Browse our sophisticated range of degree-aligned
+            professional courses.</p>
+    </header>
+
+    <div id="courseList" class="card-grid"></div>
+</div>
+
+<script>
+    async function loadCourses() {
+        try {
+            const response = await fetch("/api/courses/courses/");
+            const courses = await response.json();
+
+            const container = document.getElementById("courseList");
+            container.innerHTML = "";
+
+            courses.forEach(course => {
+                container.innerHTML += `
+                <div class="card">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem;">
+                         <span class="badge">${course.level}</span>
+                         <span style="font-size: 0.8125rem; font-weight: 700; color: var(--primary);">₹${course.price}</span>
+                    </div>
+                    <h3 style="font-size: 1.125rem; margin-bottom: 0.75rem;">${course.title}</h3>
+                    <p style="font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 2rem; line-height: 1.6;">${course.description}</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 1.25rem; border-top: 1px solid var(--slate-100);">
+                         <span style="font-size: 0.75rem; color: var(--slate-400);">By ${course.instructor_name || 'Prof. Alan Smith'}</span>
+                         <a href="/course/${course.id}/" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">View Syllabus</a>
+                    </div>
+                </div>
+            `;
+            });
+        } catch (error) {
+            console.error("Failed to load courses:", error);
+        }
+    }
+
+    loadCourses();
+</script>
+
+{% endblock %}

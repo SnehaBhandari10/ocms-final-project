@@ -1,0 +1,65 @@
+<script>
+    async function register(event) {
+        event.preventDefault();
+        const full_name = document.getElementById("reg_full_name").value;
+        const email = document.getElementById("reg_email").value;
+        const password = document.getElementById("reg_password").value;
+        const role = document.getElementById("reg_role").value;
+
+        try {
+            const res = await fetch("/api/accounts/auth/register/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, full_name, password, role })
+            });
+
+            if (res.ok) {
+                alert("Account created successfully. Please sign in.");
+                window.location.href = "/login/";
+            } else {
+                const data = await res.json();
+                alert("Registration failed: " + JSON.stringify(data));
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Server error during registration.");
+        }
+    }
+</script>
+
+<div class="container" style="max-width: 450px; margin-top: 5rem;">
+    <div class="card">
+        <h2 style="font-size: 1.5rem; font-weight: 700; text-align: center; margin-bottom: 2rem;">Register Account</h2>
+
+        <form id="registerForm" onsubmit="register(event)">
+            <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" id="reg_full_name" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" id="reg_email" placeholder="name@example.com" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" id="reg_password" placeholder="••••••••" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Account Type</label>
+                <select id="reg_role"
+                    style="padding: 0.625rem 0.875rem; width: 100%; border: 1px solid var(--border); border-radius: var(--radius-sm);">
+                    <option value="STUDENT">Student</option>
+                    <option value="INSTRUCTOR">Instructor</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Create Account</button>
+        </form>
+
+        <p style="text-align: center; margin-top: 1.5rem; font-size: 0.875rem; color: var(--text-muted);">
+            Already have an account? <a href="/login/"
+                style="color: var(--primary); font-weight: 600; text-decoration: none;">Log in</a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}

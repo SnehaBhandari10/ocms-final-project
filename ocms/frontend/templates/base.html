@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCMS | Online Course Management</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a href="/" class="navbar-brand">OCMS</a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/courses-page/">Catalog</a>
+            <a href="/student-dashboard/" id="nav-learning" style="display: none;">My Learning</a>
+            <a href="/instructor-dashboard/" id="nav-teach" style="display: none;">Teach</a>
+            <div id="nav-auth-guest" style="display: flex; gap: 1rem;">
+                <a href="/login/" class="btn btn-secondary" style="padding: 0.5rem 1.25rem;">Login</a>
+                <a href="/register/" class="btn btn-primary" style="padding: 0.5rem 1.25rem;">Join Free</a>
+            </div>
+            <div id="nav-auth-user" style="display: none; align-items: center; gap: 1rem;">
+                <a href="#" onclick="logout()" class="btn btn-secondary" style="padding: 0.5rem 1.25rem;">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = localStorage.getItem("access");
+            if (token) {
+                document.getElementById('nav-auth-guest').style.display = 'none';
+                document.getElementById('nav-auth-user').style.display = 'flex';
+                document.getElementById('nav-learning').style.display = 'block';
+                document.getElementById('nav-teach').style.display = 'block';
+            }
+        });
+    </script>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="container" style="margin: 0 auto;">
+            <p>&copy; 2026 Online Course Management System. Built for simplicity.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+
+</html>
